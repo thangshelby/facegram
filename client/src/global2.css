@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .hover-pointer:hover {
+    cursor: pointer;
+  }
+  .click:clip {
+    opacity: 0.6;
+  }
+  .no-opacity {
+    opacity: 1 !important;
+  }
+  .icon-size img {
+    width: 26px;
+    height: 24px;
+    object-fit: contain;
+  }
+  .icon-size div:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .z-index {
+    z-index: 50;
+  }
+  .opacity-none {
+    opacity: unset !important;
+  }
+  .arrow-circle-right {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    position: relative;
+  }
+
+  .arrow-circle-right::before {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    transform: rotate(45deg);
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #1a1a1a;
+    border-right: 2px solid #1a1a1a;
+  }
+  .arrow-circle-left {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    position: relative;
+  }
+
+  .arrow-circle-left::before {
+    content: "";
+    position: absolute;
+    top:30%;
+    right: 25%;
+    transform: rotate(45deg);
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid #1a1a1a;
+    border-bottom: 2px solid #1a1a1a;
+  }
+}
+lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.hiddenn {
+  display: none;
+}
