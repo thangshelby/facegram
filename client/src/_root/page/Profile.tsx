@@ -15,7 +15,6 @@ import { SocialMediaInteraction } from "../userSlice";
 
 type followTypeProps = "" | "Followers" | "Followings";
 
-
 const Profile = () => {
   const accessToken = useSelector(getAccessToken);
   const useSocketContext: SocketContextProps | null = useContext(SocketContext);
@@ -67,8 +66,7 @@ const Profile = () => {
     getUsers({
       accessToken,
       userId: currentUser._id,
-      userList:
-        type == "Followers" ? admin.followers : admin.followings,
+      userList: type == "Followers" ? admin.followers : admin.followings,
       type: "getUsers",
     });
     setIsShow({ check: true, type });
@@ -86,141 +84,143 @@ const Profile = () => {
 
   const myPostList: postProps[] = useSelector(postsSelector);
   return (
+    <div
+      onClick={() => {
+        setIsShow({ check: false, type: "" });
+      }}
+      className={`z-10 h-screen w-full flex flex-col overflow-scroll  
+   gap-5 p-[30px] mb-[20px]`}
+    >
+      {/* SHOW FOLLOW LAYOUT */}
+      {isShow.check && (
+        <div className="box-border no-opacity z-2 w-full h-full">
+          <FollowLayout isShow={isShow} setIsShow={setIsShow} admin={admin} />
+        </div>
+      )}
+      {/* SHOW FOLLOW LAYOUT */}
 
-      <div
-        onClick={() => {
-          setIsShow({ check: false, type: "" });
-        }}
-        className={`  
-   -z-10 flex flex-col gap-5 p-[30px] mb-[20px]`}
-      >
-        {isShow.check && (
-          <div className="box-border no-opacity z-2 w-full h-full">
-            <FollowLayout
-              isShow={isShow}
-              setIsShow={setIsShow}
-              admin={admin}
-            />
-          </div>
-        )}
-        {isChange && admin._id== currentUser._id && (
-          <input
-            accept="file"
-            type="file"
-            onChange={(e) => {
-              setImgAvatarr(e.target.value);
-            }}
-          ></input>
-        )}
+      {/* CHANE IMAGE AVATAR  */}
+      {isChange && admin._id == currentUser._id && (
+        <input
+          accept="file"
+          type="file"
+          onChange={(e) => {
+            setImgAvatarr(e.target.value);
+          }}
+        ></input>
+      )}
+      {/* CHANE IMAGE AVATAR  */}
 
-        <div className={`${isShow.check && "opacity-50"}  flex flex-row `}>
-          <div
-            onClick={() => setIsChange(!isChange)}
-            className="flex items-center justify-center 
+      {/* PROFILE INFO */}
+      <div className={`${isShow.check && "opacity-50"}  flex flex-row `}>
+        <div
+          onClick={() => setIsChange(!isChange)}
+          className="flex items-center justify-center 
         w-[290px] h-[150px] hover-pointer"
-          >
-            <CustomAvatar
-              fullName={admin.userName}
-              imgg={admin.imgAvatar}
-              size={"h-[150px] w-[150px] rounded-[50%]"}
-            />
-          </div>
-
-          <div className="flex flex-col justify-evenly text-[16px] ">
-            <div className="flex flex-row gap-5 leading-8">
-              <p>{admin.userName}</p>
-              {admin._id == currentUser._id ? (
-                <div className="hover-pointer px-[16px] font-semibold  bg-[#363636] rounded-lg ">
-                  Update Profile
-                </div>
-              ) : (
-                <div className="hover-pointer px-[16px] font-semibold  bg-[#0095f6] rounded-lg ">
-                  {currentUser.followings.length > 0 &&
-                  currentUser.followings.includes(admin._id) ? (
-                    <div
-                      onClick={() => {
-                        handleSocialMediaInteraction(
-                          currentUser._id,
-                          admin._id,
-                          "unFollow"
-                        );
-                      }}
-                    >
-                      Following
-                    </div>
-                  ) : (
-                    <div
-                      onClick={() => {
-                        handleSocialMediaInteraction(
-                          currentUser._id,
-                          admin._id,
-                          "unFollow"
-                        );
-                      }}
-                    >
-                      Follow
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-row gap-5">
-              <div className="hover-pointer">
-                <p className="font-semibold inline-block">
-                  {myPostList.length}
-                </p>{" "}
-                posts
-              </div>
-
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handlegetUsers("Followers");
-                }}
-                className="hover-pointer"
-              >
-                {" "}
-                <div className="font-semibold inline-block">
-                  {admin.followers.length}
-                </div>{" "}
-                followers
-              </div>
-
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handlegetUsers("Followings");
-                }}
-                className="hover-pointer"
-              >
-                {" "}
-                <p className="font-semibold inline-block">
-                  {admin.followings.length}
-                </p>{" "}
-                following
-              </div>
-            </div>
-
-            <div className="font-semibold flex flex-row gap-5">
-              <h4>{admin.name}</h4>
-            </div>
-          </div>
+        >
+          <CustomAvatar
+            fullName={admin.userName}
+            imgg={admin.imgAvatar}
+            size={"h-[150px] w-[150px] rounded-[50%]"}
+          />
         </div>
 
-        {/* My Post */}
+        <div className="flex flex-col justify-evenly text-[16px] ">
+          <div className="flex flex-row gap-5 leading-8">
+            <p>{admin.userName}</p>
+            {admin._id == currentUser._id ? (
+              <div className="hover-pointer px-[16px] font-semibold  bg-[#363636] rounded-lg ">
+                Update Profile
+              </div>
+            ) : (
+              <div className="hover-pointer px-[16px] font-semibold  bg-[#0095f6] rounded-lg ">
+                {currentUser.followings.length > 0 &&
+                currentUser.followings.includes(admin._id) ? (
+                  <div
+                    onClick={() => {
+                      handleSocialMediaInteraction(
+                        currentUser._id,
+                        admin._id,
+                        "unFollow"
+                      );
+                    }}
+                  >
+                    Following
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      handleSocialMediaInteraction(
+                        currentUser._id,
+                        admin._id,
+                        "unFollow"
+                      );
+                    }}
+                  >
+                    Follow
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-row gap-5">
+            <div className="hover-pointer">
+              <p className="font-semibold inline-block">{myPostList.length}</p>{" "}
+              posts
+            </div>
+
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                handlegetUsers("Followers");
+              }}
+              className="hover-pointer"
+            >
+              {" "}
+              <div className="font-semibold inline-block">
+                {admin.followers.length}
+              </div>{" "}
+              followers
+            </div>
+
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                handlegetUsers("Followings");
+              }}
+              className="hover-pointer"
+            >
+              {" "}
+              <p className="font-semibold inline-block">
+                {admin.followings.length}
+              </p>{" "}
+              following
+            </div>
+          </div>
+
+          <div className="font-semibold flex flex-row gap-5">
+            <h4>{admin.name}</h4>
+          </div>
+        </div>
+      </div>
+      {/* PROFILE INFO */}
+
+      {/* PROFILE POST */}
+      <div className="px-[30px]">
         <div
           className={`${
             isShow.check && "opacity-50"
-          }  border-t-[1px] border-[#363636] my-[20px]`}
+          }   border-t-[1px] border-[#363636] my-[20px]`}
         >
           <div
-            className="w-[100%] h-[307px] flex flex-row gap-x-[18px] gap-y-3 flex-wrap 
-           overflow-scroll custom-scrollbar py-[20px] justify-between"
+            className="w-[100%]  flex flex-row overflow-hidden flex-wrap 
+            py-[20px] justify-between gap-y-[6px]"
           >
             {myPostList.map((post) => (
               <img
-                className="w-[30%] xl:h-[307px] h-[80%] hover-pointer hover:opacity-70"
+                className="w-[32.9%] xl:h-[307px] h-[80%] hover-pointer 
+                hover:opacity-70"
                 key={post._id}
                 src={post.imageUrl}
               />
@@ -228,6 +228,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+      {/* PROFILE POST */}
+    </div>
   );
 };
 

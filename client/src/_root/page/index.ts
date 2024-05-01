@@ -1,5 +1,4 @@
 import AllUsers from "./AllUsers";
-import Explore from "./Explore";
 import Post from "./Post";
 import Profile from "./Profile";
 import UpdatePost from "./UpdatePost";
@@ -13,7 +12,6 @@ import StoryDetail from "./StoryDetail";
 import StoryDetailList from "./StoryDetailList";
 export {
   AllUsers,
-  Explore,
   Post,
   Profile,
   UpdatePost,

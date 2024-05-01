@@ -84,13 +84,12 @@ const Post = ({
       </div>
 
       <div className="w-full  h-[360px] 
-      rounded-[20px] overflow-hidden">
+      rounded-[5px] overflow-hidden">
         <img
           onDoubleClick={() => {
             handleLikePost();
           }}
-          className="object-cover w-full h-full  
-          rounded-[50px] overflow-hidden"
+          className="object-cover w-full h-full"
           src={imageUrl}
         />
       </div>

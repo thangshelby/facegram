@@ -9,7 +9,6 @@ import "./Global.css";
 import "./global2.css";
 import {
   AllUsers,
-  Explore,
   Profile,
   UpdatePost,
   Home,
@@ -54,7 +53,6 @@ const App = () => {
           <Route path="/direct/inbox" element={<MessageLayout />} />
           <Route path="/direct/inbox/:id" element={<MessageLayout />} />
           <Route path="/alluser" element={<AllUsers />} />
-          <Route path="/explore" element={<Explore />} />
           <Route path="/update-post/:id" element={<UpdatePost />} />
           <Route path="/profile/:userName" element={<Profile />} />
         </Route>
